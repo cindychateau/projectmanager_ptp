@@ -43,4 +43,29 @@ public class ServicioProyectos {
 		return rp.findById(id).orElse(null);
 	}
 	
+	public void unirProyecto(Long usuarioId, Long proyectoId) {
+		Usuario miUsuario = encontrarUsuario(usuarioId);
+		Proyecto proyectoAUnir = encontrarProyecto(proyectoId);
+		
+		proyectoAUnir.getUsuariosUnidos().add(miUsuario);
+		rp.save(proyectoAUnir);
+		
+		/*
+		 miUsuario.getProyectosUnidos().add(proyectoAUnir);
+		 ru.save(miUsuario)
+		 */
+	}
+	
+	public void salirProyecto(Long usuarioId, Long proyectoId) {
+		Usuario miUsuario = encontrarUsuario(usuarioId);
+		Proyecto proyectoAUnir = encontrarProyecto(proyectoId);
+		
+		proyectoAUnir.getUsuariosUnidos().remove(miUsuario);
+		rp.save(proyectoAUnir);
+		/*
+		 miUsuario.getProyectosUnidos().remove(proyectoAUnir);
+		 ru.save(miUsuario)
+		 */
+	}
+	
 }

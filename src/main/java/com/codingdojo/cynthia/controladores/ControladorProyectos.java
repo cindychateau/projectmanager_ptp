@@ -134,4 +134,32 @@ public class ControladorProyectos {
 			return "redirect:/dashboard";
 		}
 	}
+	
+	@GetMapping("/unir/{proyectoId}")
+	public String unir(HttpSession session,
+					   @PathVariable("proyectoId") Long proyectoId) {
+		/*---- REVISAMOS INICIO DE SESIÓN ----*/
+		Usuario usuarioTemporal = (Usuario)session.getAttribute("usuarioEnSesion");
+		if(usuarioTemporal == null) {
+			return "redirect:/";
+		}
+		/*---- REVISAMOS INICIO DE SESIÓN ----*/
+		
+		sp.unirProyecto(usuarioTemporal.getId(), proyectoId);
+		return "redirect:/dashboard";
+	}
+	
+	@GetMapping("/salir/{proyectoId}")
+	public String salir(HttpSession session,
+						@PathVariable("proyectoId") Long proyectoId) {
+		/*---- REVISAMOS INICIO DE SESIÓN ----*/
+		Usuario usuarioTemporal = (Usuario)session.getAttribute("usuarioEnSesion");
+		if(usuarioTemporal == null) {
+			return "redirect:/";
+		}
+		/*---- REVISAMOS INICIO DE SESIÓN ----*/
+		
+		sp.salirProyecto(usuarioTemporal.getId(), proyectoId);
+		return "redirect:/dashboard";
+	}
 }
